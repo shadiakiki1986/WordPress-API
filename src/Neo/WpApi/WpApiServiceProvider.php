@@ -35,7 +35,11 @@ class WpApiServiceProvider extends ServiceProvider {
 		// Create a default ioc binding
 		$this->app->bind('wp-api', function($app)
 		{
-			return new WpApi($app['Neo\WpApi\Service\ServiceInterface']);
+			$wp = new WpApi($app['Neo\WpApi\Service\ServiceInterface']);
+
+			$wp->setConfig(Config::get('wp-api::config', []));
+
+			return $wp;
 		});
 	}
 

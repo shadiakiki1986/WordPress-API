@@ -1,7 +1,5 @@
 <?php namespace Neo\WpApi;
 
-use Config;
-use Session;
 use Illuminate\Support\Collection;
 use Neo\WpApi\Exception\AuthException;
 use Neo\WpApi\Service\ServiceInterface;
@@ -23,6 +21,13 @@ class WpApi {
 	protected $accessToken;
 
 	/**
+	 * Configuration.
+	 *
+	 * @var array
+	 */
+	protected $config = array();
+
+	/**
 	 * Class constructor.
 	 *
 	 * @param 	Neo\WpApi\Service\ServiceInterface $client
@@ -42,6 +47,9 @@ class WpApi {
 	 */
 	public function connect($credentials = array())
 	{
+		// Start the session if not already started...
+		if (session_id() == '') session_start();
+
 		if ( ! $accessToken = $this->client->getAccessToken())
 		{
 			$client_id = array_get($credentials, 'client_id', $this->config('client_id'));
@@ -172,6 +180,19 @@ class WpApi {
 	}
 
 	/**
+	 * Set the configuration values.
+	 *
+	 * @param  array $config
+	 * @return Neo\WpApi\WpApi
+	 */
+	public function setConfig(array $config)
+	{
+		$this->config = $config;
+
+		return $this;
+	}
+
+	/**
 	 * Get a configuration item value.
 	 *
 	 * @param  string  $key
@@ -180,7 +201,7 @@ class WpApi {
 	 */
 	protected function config($key, $default = false)
 	{
-		return Config::get('wp-api::config.'.$key, $default);
+		return array_get($this->config, $key, $default);
 	}
 
 }

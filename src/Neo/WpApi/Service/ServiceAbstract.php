@@ -1,6 +1,5 @@
 <?php namespace Neo\WpApi\Service;
 
-use Session;
 use Illuminate\Support\Collection;
 use Neo\WpApi\Exception\ApiException;
 use Neo\WpApi\Exception\UnknownPostException;
@@ -125,9 +124,7 @@ abstract class ServiceAbstract {
 	 */
 	public function setAccessToken($access_token)
 	{
-		Session::put('wpapi', $access_token);
-
-		$this->access_token = $access_token;
+		$_SESSION['wpapi'] = $this->access_token = $access_token;
 
 		return $this;
 	}
@@ -139,9 +136,9 @@ abstract class ServiceAbstract {
 	 */
 	public function getAccessToken()
 	{
-		if ( ! $this->access_token && Session::has('wpapi'))
+		if ( ! $this->access_token && array_get($_SESSION, 'wpapi'))
 		{
-			$this->access_token = Session::get('wpapi');
+			$this->access_token = array_get($_SESSION, 'wpapi');
 		}
 
 		return $this->access_token;
