@@ -38,7 +38,7 @@ Usage is simple as you can hope...
 
 Laravel users can just include the service provider `Neo\WpApi\WpApiServiceProvider` in their app configuration file.
 
-Create a configuration file and name it `wpapi.php` where you can now specify your configuration items as listed above.
+You can now run `artisan config::publish` to publish the configuration file and customise.
 
 	<?php
 

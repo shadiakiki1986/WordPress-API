@@ -37,7 +37,7 @@ class WpApiServiceProvider extends ServiceProvider {
 		{
 			$wp = new WpApi($app['Neo\WpApi\Service\ServiceInterface']);
 
-			$wp->setConfig(Config::get('wpapi::config', []));
+			$wp->setConfig(Config::get('wp-api::config', []));
 
 			return $wp;
 		});
