@@ -1,6 +1,7 @@
 {
     "name": "neo/wp-api",
     "description": "Laravel - WordPress API",
+    "license": "MIT",
     "authors": [
         {
             "name": "Neo Ighodaro",
