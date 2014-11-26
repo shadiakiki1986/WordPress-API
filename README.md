@@ -33,3 +33,25 @@ Usage is simple as you can hope...
     $post = $wp->postById(400);
 
     $post_likes = $wp->api('GET', 'sites/$site_id/posts/$post_id/likes');
+
+### Laravel Users
+
+Laravel users can just include the service provider `Neo\WpApi\WpApiServiceProvider` in their app configuration file.
+
+Create a configuration file and name it `wpapi.php` where you can now specify your configuration items as listed above.
+
+	<?php
+
+	$wp = App::make('wp-api')->connect();
+
+	// Make your api calls...
+
+	$posts = $wp->postsByPage(1);
+
+### Advice
+
+This WordPress API uses the grant "password" type which is meant for **testing purposes**, though I would not mind using it on a real WordPress site since it allows me completely abstract my wordpress site as a back end.
+
+Note that its recommended you use the 2-step authentication and create an Application password in your Wordpress.com dashboard. Using your actual Wordpress password is not recommended.
+
+Enjoy.
