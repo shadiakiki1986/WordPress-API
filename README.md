@@ -6,10 +6,12 @@ This package allows Laravel users to interact with the WordPress API. I personal
 
 Usage is simple as you can hope...
 
+	<?php
+
 	use Neo\WpApi\WpApi;
 	use Neo\WpApi\Service\GuzzleService;
 
-	// Het the instance of the WP Api
+	// Get the instance of the WP Api
     $wp = new WpApi(new GuzzleService);
 
     // Set the configuration
@@ -18,7 +20,7 @@ Usage is simple as you can hope...
     	'client_secret' => '',
     	'username' 		=> '',
     	'password' 		=> '',
-    	'site_id'		=> '')
+    	'site_id'		=> '',
     );
 
     // Connect to the API
