@@ -1,0 +1,21 @@
+{
+    "name": "neo/wp-api",
+    "description": "Laravel - WordPress API",
+    "authors": [
+        {
+            "name": "Neo Ighodaro",
+            "email": "neo@creativitykills.co"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "4.2.*",
+        "guzzle/guzzle": "3.9.*@dev"
+    },
+    "autoload": {
+        "psr-0": {
+            "Neo\\WpApi": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
