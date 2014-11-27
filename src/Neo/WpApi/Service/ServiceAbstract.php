@@ -169,22 +169,26 @@ abstract class ServiceAbstract {
 	 */
 	protected function verifyResponse($response)
 	{
+		$message = 'An unknown error occurred.';
+
 		if ($response = json_decode($response))
 		{
 			if (isset($response->error))
 			{
+				$message = isset($response->message) ? $response->message : $response->error_description;
+
 				switch ($response->error)
 				{
-					case 'unauthorized':
-						throw new UnauthorizedException($response->message);
+					case 'unauthorized' OR 'unknown_client':
+						throw new UnauthorizedException($message);
 						break;
 
 					case 'unknown_post':
-						throw new UnknownPostException($response->message);
+						throw new UnknownPostException($message);
 						break;
 
 					case 'unknown_blog':
-						throw new UnknownBlogException($response->message);
+						throw new UnknownBlogException($message);
 						break;
 
 					default:

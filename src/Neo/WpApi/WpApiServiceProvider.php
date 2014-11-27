@@ -1,5 +1,6 @@
 <?php namespace Neo\WpApi;
 
+use Config;
 use Neo\WpApi\WpApi;
 use Illuminate\Support\ServiceProvider;
 

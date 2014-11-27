@@ -21,4 +21,6 @@ return array(
 
 	'client_secret'	=> 'client_secret',
 
+	'site_id'		=> 'site_url.com',
+
 );
