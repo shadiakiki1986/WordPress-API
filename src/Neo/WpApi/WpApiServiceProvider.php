@@ -2,7 +2,9 @@
 
 use Config;
 use Neo\WpApi\WpApi;
+use Neo\WpApi\Cache\LaravelCache;
 use Illuminate\Support\ServiceProvider;
+use Neo\WpApi\Service\Decorator\CacheDecorator;
 
 class WpApiServiceProvider extends ServiceProvider {
 
@@ -36,9 +38,22 @@ class WpApiServiceProvider extends ServiceProvider {
 		// Create a default ioc binding
 		$this->app->bind('wp-api', function($app)
 		{
+			// Get instance of WordPress API class...
 			$wp = new WpApi($app['Neo\WpApi\Service\ServiceInterface']);
 
+			// Set the configuration
 			$wp->setConfig(Config::get('wp-api::config', []));
+
+			$cache_minutes = (int) Config::get('wp-api::config.cache_minutes');
+
+			if ($cache_minutes > 0)
+			{
+				// Add the cache decorator...
+				$wp = new CacheDecorator(
+					$wp,
+					new LaravelCache($app['cache'], 'wpapi', $cache_minutes)
+				);
+			}
 
 			return $wp;
 		});

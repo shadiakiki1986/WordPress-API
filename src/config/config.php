@@ -23,4 +23,16 @@ return array(
 
 	'site_id'		=> 'site_url.com',
 
+	// -------------------------------------------------------------
+	// Cache minutes for API calls
+	// -------------------------------------------------------------
+	//
+	// Specify minutes to Cache the api resopnse for. To turn off,
+	// set minutes to 0.
+	//
+	// -------------------------------------------------------------
+
+	'cache_minutes'	=> 5,
+
+
 );

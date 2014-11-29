@@ -4,7 +4,7 @@ use Illuminate\Support\Collection;
 use Neo\WpApi\Exception\AuthException;
 use Neo\WpApi\Service\ServiceInterface;
 
-class WpApi {
+class WpApi implements ServiceInterface {
 
 	/**
 	 * Client interface instance.
@@ -39,13 +39,46 @@ class WpApi {
 	}
 
 	/**
+	 * Connect to the Wordpress API using a username and password combination.
+	 *
+	 * @param  string 		$client_id
+	 * @param  string		$client_secret
+	 * @param  string		$username
+	 * @param  string 		$password
+	 * @return object
+	 * @throws Neo\WpApi\Exception\AuthException
+	 */
+	public function connect($client_id = false, $client_secret = false, $username = false, $password = false)
+	{
+		if ( ! $client_id)
+		{
+			$credentials = array();
+		}
+		else if (is_array($client_id))
+		{
+			$credentials = $client_id;
+		}
+		else
+		{
+			$credentials = array(
+				'client_id'	=> $client_id,
+				'client_secret' => $client_secret,
+				'username'	=> $username,
+				'password'	=> $password,
+			);
+		}
+
+		return $this->_connect($credentials);
+	}
+
+	/**
 	 * Connect to WordPress.com using password authentication and
 	 * retrieve (then store) the access token.
 	 *
 	 * @param  array        $credentials
 	 * @return string|false
 	 */
-	public function connect($credentials = array())
+	protected function _connect($credentials = array())
 	{
 		// Start the session if not already started...
 		if (session_id() == '') session_start();
@@ -132,13 +165,14 @@ class WpApi {
 	}
 
 	/**
-	 * Get the WordPress site info.
+	 * Get the site information.
 	 *
-	 * @return array
+	 * @param  string $key
+	 * @return mixed|Illuminate\Support\Collection
 	 */
-	public function getSiteInfo()
+	public function getSiteInfo($key = false)
 	{
-		return $this->client->getSiteInfo();
+		return $this->client->getSiteInfo($key);
 	}
 
 	/**
