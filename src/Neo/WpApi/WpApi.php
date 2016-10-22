@@ -259,6 +259,7 @@ class WpApi implements ServiceInterface {
       array('_data'=>array(
         'title'=>$title,
         'content'=>$content,
+        'excerpt'=>'',
         'tags'=>$tags,
         'categories'=>$categories
       )),
