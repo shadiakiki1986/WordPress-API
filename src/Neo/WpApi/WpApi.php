@@ -238,4 +238,37 @@ class WpApi implements ServiceInterface {
 		return array_get($this->config, $key, $default);
 	}
 
+	/**
+	 * Create a new post using the Wordpress API.
+   * Check parameter passed to the http_build_query function in the example php code published at https://developer.wordpress.com/docs/api/1.2/post/sites/%24site/posts/new/
+	 *
+	 * @param  string title
+   * @param  string content
+   * @param  string tags
+   * @param  string categories
+	 * @return Illuminate\Support\Collection
+	 */
+	public function newPost($title,$content,$tags,$categories)
+	{
+		// Get the wordpress site ID
+		$site_id = $this->config('site_id');
+    $page = 'sites/'.$site_id.'/posts/new';
+		$posts = $this->client->api(
+      'POST',
+      $page,
+      array('_data'=>array(
+        'title'=>$title,
+        'content'=>$content,
+        'tags'=>$tags,
+        'categories'=>$categories
+      )),
+      array ('Content-Type'=> 'application/x-www-form-urlencoded')
+    );
+
+		return array_intersect_key(
+      json_decode($posts,true),
+      array_flip(['title','URL'])
+    );
+	}
+
 }
