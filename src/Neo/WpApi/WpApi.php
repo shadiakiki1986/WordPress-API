@@ -259,7 +259,7 @@ class WpApi implements ServiceInterface {
       array('_data'=>array(
         'title'=>$title,
         'content'=>$content,
-        'excerpt'=>'',
+        'excerpt'=>'<p></p>', // sending empty excerpt intentionally because I dont need it ATM
         'tags'=>$tags,
         'categories'=>$categories
       )),
