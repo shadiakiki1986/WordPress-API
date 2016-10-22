@@ -2,6 +2,10 @@ This is a fork, published at packagist under [shadiakiki1986/wp-api](https://pac
 
 Install with `composer require shadiakiki1986/wp-api`
 
+The `client id` field and `client secret` field need to be obtained after creating a new Application in Wordpress.
+Using wordpress.com, it can be done with the [applications manager](https://developer.wordpress.com/apps/) as documented on wordpress's [oauth2](https://developer.wordpress.com/docs/oauth2/) page.
+Note that this package uses `grant_type => password` documented on the oauth2 page (i.e. to use username and password directly)
+
 # WordPress API
 
 This package allows Laravel users to interact with the WordPress API. I personally use this as a way to abstract the WordPress backend from the frontend of the website.
