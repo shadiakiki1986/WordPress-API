@@ -1,3 +1,7 @@
+This is a fork, published at packagist under [shadiakiki1986/wp-api](https://packagist.org/packages/shadiakiki1986/wp-api)
+
+Install with `composer require shadiakiki1986/wp-api`
+
 # WordPress API
 
 This package allows Laravel users to interact with the WordPress API. I personally use this as a way to abstract the WordPress backend from the frontend of the website.
